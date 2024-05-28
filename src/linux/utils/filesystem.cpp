@@ -93,3 +93,7 @@ hwinfo::Jiffies hwinfo::filesystem::get_jiffies(int index) {
 }
 
 #endif  // HWINFO_UNIX
+
+#ifdef HWINFO_APPLE
+
+#endif // HWINFO_APPLE

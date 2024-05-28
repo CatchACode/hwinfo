@@ -15,40 +15,26 @@
 namespace hwinfo {
 
 // _____________________________________________________________________________________________________________________
-std::string RAM::getVendor() {
-  // TODO: implement
-  return "<unknown>";
+Memory::Memory() {
+  // TODO: get information for actual memory modules (DIMM)
+  Module module;
+  module.vendor = "<unknown>";
+  module.name = "<unknown>";
+  module.serial_number = "<unknown>";
+  module.model = "<unknown>";
+  module.id = 0;
+  module.total_Bytes = 0;
+  module.frequency_Hz = -1;
+  _modules.push_back(module);
 }
 
-// _____________________________________________________________________________________________________________________
-std::string RAM::getName() {
-  // TODO: implement
-  return "<unknown>";
-}
-
-// _____________________________________________________________________________________________________________________
-std::string RAM::getModel() {
-  // TODO: implement
-  return "<unknown>";
-}
-
-// _____________________________________________________________________________________________________________________
-std::string RAM::getSerialNumber() {
-  // TODO: implement
-  return "<unknown>";
-}
-
-// _____________________________________________________________________________________________________________________
-int64_t RAM::getTotalSize_Bytes() {
-  int64_t memsize = 0;
-  size_t size = sizeof(memsize);
-  if (sysctlbyname("hw.memsize", &memsize, &size, nullptr, 0) == 0) {
-    return memsize;
-  }
+int64_t Memory::available_Bytes() const {
   return -1;
 }
 
-int64_t RAM::getAvailableMemory() { return -1; }
+int64_t Memory::free_Bytes() const {
+  return -1;
+}
 
 }  // namespace hwinfo
 

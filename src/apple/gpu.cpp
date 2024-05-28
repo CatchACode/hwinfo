@@ -41,4 +41,15 @@ int64_t GPU::getMemory_Bytes() {
 }  // namespace hwinfo
 
 #endif  // USE_OCL
+
+#include <vector>
+
+#include "hwinfo/gpu.h"
+
+namespace hwinfo {
+  std::vector<GPU> getAllGPUs() {
+    return {};
+  }
+}
+
 #endif  // HWINFO_APPLE

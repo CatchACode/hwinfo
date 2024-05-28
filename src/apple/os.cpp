@@ -14,51 +14,17 @@
 
 namespace hwinfo {
 
-// _____________________________________________________________________________________________________________________
-std::string OS::getFullName() {
-  size_t size = 1024;
-  std::string os_name;
-  os_name.resize(size);
-  if (sysctlbyname("kern.os", (void*)(os_name.data()), &size, nullptr, 0) == 0) {
-    os_name.resize(size);  // trim the string to the actual size
-    return os_name;
+OS::OS() {
+  _name = "<unknown>";
+  _version = "<unknown>";
+  _kernel = "<unknown>";
+  {
+    char16_t dummy = 0x0102;
+    _bigEndian = ((char*)&dummy)[0] == 0x01;
+    _littleEndian = ((char*)&dummy)[0] == 0x02;
   }
-  return "macOS <unknown version>";
+
 }
-
-// _____________________________________________________________________________________________________________________
-std::string OS::getName() {
-  size_t size = 1024;
-  std::string os_name;
-  os_name.resize(size);
-  if (sysctlbyname("kern.os", (void*)(os_name.data()), &size, nullptr, 0) == 0) {
-    os_name.resize(size);  // trim the string to the actual size
-    return os_name;
-  }
-  return "macOS";
-}
-
-// _____________________________________________________________________________________________________________________
-std::string OS::getVersion() {
-  size_t size = 1024;
-  std::string os_version;
-  os_version.resize(size);
-  if (sysctlbyname("kern.osrelease", (void*)(os_version.data()), &size, nullptr, 0) == 0) {
-    os_version.resize(size);  // trim the string to the actual size
-    return os_version;
-  }
-  return "<unknown version>";
-}
-
-// _____________________________________________________________________________________________________________________
-std::string OS::getKernel() {
-  // TODO: implement
-  return "<unknown>";
-}
-
-// _____________________________________________________________________________________________________________________
-bool OS::getIs64bit() { return true; }
-
 }  // namespace hwinfo
 
 #endif  // HWINFO_APPLE
